@@ -1,6 +1,6 @@
 import { IonItemGroup } from "@ionic/react"
 import { useState } from "react"
-import { ListTodoComponent } from "./listetodo.component"
+import { ListTodoComponent } from "./ListToDo.component"
 
 export const ListTodoPage = () => {
 
@@ -22,7 +22,7 @@ export const ListTodoPage = () => {
                 state: 'NEW'
             },
             {
-                id: 3,
+                id: 4,
                 title: 'Todo number 4',
                 state: 'DONE'
             }
@@ -33,7 +33,7 @@ export const ListTodoPage = () => {
         <>
             <IonItemGroup>
                 {allTodo && allTodo.map((todo) => {
-                    return <ListTodoComponent key={ todo.id } todo={ todo } />
+                    return <ListTodoComponent key={ todo.id } todo={ todo } setTodo={ setAllTodo }/>
                 })}
             </IonItemGroup>
         </>
