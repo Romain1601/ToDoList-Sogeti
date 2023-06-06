@@ -9,22 +9,26 @@ export const ListTodoPage = () => {
             {
                 id: 1,
                 title: 'Todo number 1',
-                state: 'NEW'
+                state: 'NEW',
+                style: ''
             },
             {
                 id: 2,
                 title: 'Todo number 2',
-                state: 'DONE'
+                state: 'DONE',
+                style: 'line-through'
             },
             {
                 id: 3,
                 title: 'Todo number 3',
-                state: 'NEW'
+                state: 'NEW',
+                style: ''
             },
             {
                 id: 4,
                 title: 'Todo number 4',
-                state: 'DONE'
+                state: 'DONE',
+                style: 'line-through'
             }
         ]
     )
@@ -32,7 +36,7 @@ export const ListTodoPage = () => {
     return (
         <>
             <IonItemGroup>
-                {allTodo && allTodo.map((todo) => {
+                {allTodo.sort((a, b) => b.state.localeCompare(a.state)) && allTodo.map((todo) => {
                     return <ListTodoComponent key={ todo.id } todo={ todo } setTodo={ setAllTodo }/>
                 })}
             </IonItemGroup>

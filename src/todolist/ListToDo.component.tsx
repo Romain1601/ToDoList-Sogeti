@@ -1,6 +1,6 @@
 import { Dispatch, FunctionComponent, SetStateAction, useState } from "react"
 import { IonCheckbox, IonItem, IonLabel } from "@ionic/react"
-import { TodoModel } from "./ListeToDo.model"
+import { TodoModel } from "./ListToDo.model"
 import './ListToDo.component.css'
 
 export interface ListTodoComponentPropsType {
@@ -13,18 +13,24 @@ export const ListTodoComponent: FunctionComponent<ListTodoComponentPropsType> = 
     const [style, setStyle] = useState(false)
 
     const changeState = (todos: TodoModel) => {
-        todo.state = todo.state === 'DONE' ? 'NEW' : 'DONE'
-        if(todo.state === 'DONE') {
+        if(todo.state !== 'DONE') {
+            todo.state = 'DONE'
             setTodo(oldTodo => oldTodo.filter(todo => todo!==todos)) 
             setTodo(todo => [...todo, todos])
+            todo.style = 'line-through'
         }
-        setStyle(!style)
+        else {
+            todo.state = 'NEW'
+            todo.style = 'none'
+            setTodo(oldTodo => oldTodo.filter(todo => todo!==todos))
+            setTodo(todo => [todos, ...todo])
+        }
     }
 
     return (
         <>
             <IonItem>
-                <IonCheckbox justify="space-between" onIonChange={() => changeState(todo)} className={style ? 'crossed' : 'no-crossed'}>
+                <IonCheckbox justify="space-between" onIonChange={(event) => changeState(todo)} checked={todo.state==='NEW' ? false : true} style={{textDecoration: todo.style}}>
                     <IonLabel>{todo.title}</IonLabel>
                     <IonLabel>{todo.state}</IonLabel>
                 </IonCheckbox>
