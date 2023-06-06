@@ -1,6 +1,6 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import './Home.css';
-import { ListTodoPage } from '../todolist/listtodo.page';
+import { ListTodoPage } from '../todolist/ListToDo.page';
 
 const Home: React.FC = () => {
   return (
