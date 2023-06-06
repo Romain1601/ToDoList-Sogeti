@@ -21,22 +21,58 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import { ListTodoComponentDetail } from './todolist/ListeToDo.component.detail';
+import { useState } from 'react';
 
 setupIonicReact();
 
-const App: React.FC = () => (
+const App: React.FC = () => {
+
+  const [allTodo, setAllTodo] = useState(
+    [
+        {
+            id: 1,
+            title: 'Todo number 1',
+            state: 'NEW',
+            style: ''
+        },
+        {
+            id: 2,
+            title: 'Todo number 2',
+            state: 'DONE',
+            style: 'line-through'
+        },
+        {
+            id: 3,
+            title: 'Todo number 3',
+            state: 'NEW',
+            style: ''
+        },
+        {
+            id: 4,
+            title: 'Todo number 4',
+            state: 'DONE',
+            style: 'line-through'
+        }
+    ]
+)
+
+  return (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
         <Route exact path="/home">
-          <Home />
+          <Home alltodo={ allTodo } setAllTodo={ setAllTodo }/>
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
         </Route>
+        <Route path="/home/detail/:id" /* component={ListTodoComponentDetail} */>
+          <ListTodoComponentDetail alltodo={allTodo} />
+        </Route>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
-);
+)};
 
 export default App;

@@ -1,42 +1,19 @@
 import { IonItemGroup } from "@ionic/react"
-import { useState } from "react"
+import { Dispatch, FunctionComponent, SetStateAction, useState } from "react"
 import { ListTodoComponent } from "./ListToDo.component"
+import { TodoModel } from "./ListToDo.model"
 
-export const ListTodoPage = () => {
+export interface ListTodoPagePropsType {
+    alltodo: TodoModel[]
+    setAllTodo: Dispatch<SetStateAction<TodoModel[]>>
+}
 
-    const [allTodo, setAllTodo] = useState(
-        [
-            {
-                id: 1,
-                title: 'Todo number 1',
-                state: 'NEW',
-                style: ''
-            },
-            {
-                id: 2,
-                title: 'Todo number 2',
-                state: 'DONE',
-                style: 'line-through'
-            },
-            {
-                id: 3,
-                title: 'Todo number 3',
-                state: 'NEW',
-                style: ''
-            },
-            {
-                id: 4,
-                title: 'Todo number 4',
-                state: 'DONE',
-                style: 'line-through'
-            }
-        ]
-    )
+export const ListTodoPage: FunctionComponent<ListTodoPagePropsType> = ({alltodo, setAllTodo}: ListTodoPagePropsType) => {
 
     return (
         <>
             <IonItemGroup>
-                {allTodo.sort((a, b) => b.state.localeCompare(a.state)) && allTodo.map((todo) => {
+                {alltodo.sort((a, b) => b.state.localeCompare(a.state)) && alltodo.map((todo) => {
                     return <ListTodoComponent key={ todo.id } todo={ todo } setTodo={ setAllTodo }/>
                 })}
             </IonItemGroup>

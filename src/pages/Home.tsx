@@ -1,8 +1,16 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import './Home.css';
 import { ListTodoPage } from '../todolist/ListToDo.page';
+import { TodoModel } from '../todolist/ListToDo.model';
+import { Dispatch, FunctionComponent, SetStateAction } from 'react';
 
-const Home: React.FC = () => {
+
+export interface HomePropsType {
+  alltodo: TodoModel[]
+  setAllTodo: Dispatch<SetStateAction<TodoModel[]>>
+}
+
+export const Home: FunctionComponent<HomePropsType> = ({alltodo,setAllTodo}: HomePropsType) => {
   return (
     <IonPage>
       <IonHeader>
@@ -11,7 +19,7 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <ListTodoPage />
+        <ListTodoPage alltodo={ alltodo } setAllTodo={ setAllTodo } />
       </IonContent>
     </IonPage>
   );
