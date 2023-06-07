@@ -53,5 +53,19 @@ You're working in the WebFactory which provides the following technical recommen
 # Bonus
 You can add any new functionality in this wonderful project if you want to, in order to satisfy your PO 😉  
 
+# How to lauch ?
+start with
+ ```
+ yarn or npm i
+ ```
+ Next one terminal with : 
+ ```
+ yarn run dev
+ ```
+ Another with :
+ ```
+ npx json-server --watch data.json --port 8000
+ ```
+ 
 
 
