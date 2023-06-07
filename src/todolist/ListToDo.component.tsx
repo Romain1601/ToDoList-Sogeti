@@ -27,7 +27,9 @@ export const ListTodoComponent: FunctionComponent<ListTodoComponentPropsType> = 
             setTodo(oldTodo => oldTodo.filter(todo => todo!==todos))
             setTodo(todo => [todos, ...todo])
         }
+       
     }
+
 
     return (
         <>

@@ -1,20 +1,27 @@
-import { IonItemGroup } from "@ionic/react"
-import { Dispatch, FunctionComponent, SetStateAction, useState } from "react"
+import { IonItemGroup, useIonViewWillEnter } from "@ionic/react"
+import { useCallback, useState } from "react"
 import { ListTodoComponent } from "./ListToDo.component"
 import { TodoModel } from "./ListToDo.model"
+import { CodeSourceManagementService } from "../codesourcemanagement/codesourcemanagement.service"
 
-export interface ListTodoPagePropsType {
-    alltodo: TodoModel[]
-    setAllTodo: Dispatch<SetStateAction<TodoModel[]>>
-}
+export const ListTodoPage = () => {
 
-export const ListTodoPage: FunctionComponent<ListTodoPagePropsType> = ({alltodo, setAllTodo}: ListTodoPagePropsType) => {
+    const [todos, setTodos] = useState<TodoModel[]>([])
+    
+    const fetchAllTodos = useCallback(
+        () => CodeSourceManagementService.getAllTodos().then(setTodos),
+        [setTodos]
+    );
+  
+    useIonViewWillEnter(() => {
+        fetchAllTodos();
+    });
 
     return (
         <>
             <IonItemGroup>
-                {alltodo.sort((a, b) => b.state.localeCompare(a.state)) && alltodo.map((todo) => {
-                    return <ListTodoComponent key={ todo.id } todo={ todo } setTodo={ setAllTodo }/>
+                {todos && todos.sort((a, b) => b.state.localeCompare(a.state)) && todos.map((todo) => {
+                    return <ListTodoComponent key={ todo.id } todo={ todo } setTodo={ setTodos }/>
                 })}
             </IonItemGroup>
         </>

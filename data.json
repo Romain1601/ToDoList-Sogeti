@@ -1,0 +1,28 @@
+{
+    "posts": [
+        {
+            "id": 1,
+            "title": "Todo number 1",
+            "state": "NEW",
+            "style": ""
+        },
+        {
+            "id": 2,
+            "title": "Todo number 2",
+            "state": "DONE",
+            "style": "line-through"
+        },
+        {
+            "id": 3,
+            "title": "Todo number 3",
+            "state": "NEW",
+            "style": ""
+        },
+        {
+            "id": 4,
+            "title": "Todo number 4",
+            "state": "DONE",
+            "style": "line-through"
+        }
+    ]
+}
