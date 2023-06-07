@@ -1,4 +1,4 @@
-import { IonBackButton, IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, useIonViewWillEnter } from "@ionic/react"
+import { IonBackButton, IonButton, IonContent, IonHeader, IonItem, IonPage, IonTitle, IonToolbar, useIonViewWillEnter } from "@ionic/react"
 import { useCallback, useState } from "react";
 import { useParams } from "react-router";
 import { CodeSourceManagementService } from "../codesourcemanagement/codesourcemanagement.service";
@@ -24,9 +24,11 @@ export const ListTodoComponentDetail = () => {
             <IonPage>
                 <IonHeader>
                     <IonToolbar>
-                        <IonTitle>Detail TODO</IonTitle>
-                        <IonButton routerLink="/home">List ToDo</IonButton>
-                        <IonBackButton></IonBackButton>
+                        <IonItem lines="none">
+                            <IonBackButton></IonBackButton>
+                            <IonTitle>Detail TODO</IonTitle>
+                            <IonButton routerLink="/home">List ToDo</IonButton>
+                        </IonItem>
                     </IonToolbar>
                 </IonHeader>
                 <IonContent className="ion-padding">

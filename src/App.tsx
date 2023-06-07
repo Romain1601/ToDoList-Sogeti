@@ -22,6 +22,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import { ListTodoComponentDetail } from './todolist/ListeToDo.component.detail';
+import { ListTodoPage } from './todolist/listtodo.page';
 
 setupIonicReact();
 
@@ -32,7 +33,7 @@ const App: React.FC = () => {
     <IonReactRouter>
       <IonRouterOutlet>
         <Route exact path="/home">
-          <Home />
+          <ListTodoPage />
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
