@@ -1,43 +1,27 @@
-import { IonItemGroup } from "@ionic/react"
-import { useState } from "react"
+import { IonItemGroup, useIonViewWillEnter } from "@ionic/react"
+import { useCallback, useState } from "react"
 import { ListTodoComponent } from "./ListToDo.component"
+import { TodoModel } from "./ListToDo.model"
+import { CodeSourceManagementService } from "../codesourcemanagement/codesourcemanagement.service"
 
 export const ListTodoPage = () => {
 
-    const [allTodo, setAllTodo] = useState(
-        [
-            {
-                id: 1,
-                title: 'Todo number 1',
-                state: 'NEW',
-                style: ''
-            },
-            {
-                id: 2,
-                title: 'Todo number 2',
-                state: 'DONE',
-                style: 'line-through'
-            },
-            {
-                id: 3,
-                title: 'Todo number 3',
-                state: 'NEW',
-                style: ''
-            },
-            {
-                id: 4,
-                title: 'Todo number 4',
-                state: 'DONE',
-                style: 'line-through'
-            }
-        ]
-    )
+    const [todos, setTodos] = useState<TodoModel[]>([])
+    
+    const fetchAllTodos = useCallback(
+        () => CodeSourceManagementService.getAllTodos().then(setTodos),
+        [setTodos]
+    );
+  
+    useIonViewWillEnter(() => {
+        fetchAllTodos();
+    });
 
     return (
         <>
             <IonItemGroup>
-                {allTodo.sort((a, b) => b.state.localeCompare(a.state)) && allTodo.map((todo) => {
-                    return <ListTodoComponent key={ todo.id } todo={ todo } setTodo={ setAllTodo }/>
+                {todos && todos.sort((a, b) => b.state.localeCompare(a.state)) && todos.map((todo) => {
+                    return <ListTodoComponent key={ todo.id } todo={ todo } setTodo={ setTodos }/>
                 })}
             </IonItemGroup>
         </>

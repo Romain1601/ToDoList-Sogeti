@@ -1,7 +1,10 @@
-import { Dispatch, FunctionComponent, SetStateAction, useState } from "react"
-import { IonCheckbox, IonItem, IonLabel } from "@ionic/react"
+import { Dispatch, FunctionComponent, SetStateAction } from "react"
+import { IonButton, IonCheckbox, IonItem, IonLabel, IonRouterOutlet } from "@ionic/react"
 import { TodoModel } from "./ListToDo.model"
 import './ListToDo.component.css'
+import { Route } from "react-router"
+import {ListTodoComponentDetail} from "./ListeToDo.component.detail"
+import { CodeSourceManagementService } from "../codesourcemanagement/codesourcemanagement.service"
 
 export interface ListTodoComponentPropsType {
     todo: TodoModel
@@ -10,22 +13,24 @@ export interface ListTodoComponentPropsType {
 
 export const ListTodoComponent: FunctionComponent<ListTodoComponentPropsType> = ({todo, setTodo}: ListTodoComponentPropsType) => {
 
-    const [style, setStyle] = useState(false)
-
     const changeState = (todos: TodoModel) => {
         if(todo.state !== 'DONE') {
             todo.state = 'DONE'
+            todo.style = 'line-through'
             setTodo(oldTodo => oldTodo.filter(todo => todo!==todos)) 
             setTodo(todo => [...todo, todos])
-            todo.style = 'line-through'
+            CodeSourceManagementService.modifyTodo(todo.id.toString(), todo)
         }
         else {
             todo.state = 'NEW'
             todo.style = 'none'
             setTodo(oldTodo => oldTodo.filter(todo => todo!==todos))
             setTodo(todo => [todos, ...todo])
+            CodeSourceManagementService.modifyTodo(todo.id.toString(), todo)
         }
+       
     }
+
 
     return (
         <>
@@ -34,8 +39,13 @@ export const ListTodoComponent: FunctionComponent<ListTodoComponentPropsType> = 
                     <IonLabel>{todo.title}</IonLabel>
                     <IonLabel>{todo.state}</IonLabel>
                 </IonCheckbox>
-            </IonItem>
-            
+                <IonButton routerLink={`home/detail/${todo.id}`} >
+                    Detail
+                    <IonRouterOutlet>
+                       <Route path={`home/detail/:${todo.id}`} component={ListTodoComponentDetail } />
+                    </IonRouterOutlet>
+                </IonButton>
+            </IonItem>     
         </>
     )
 }
