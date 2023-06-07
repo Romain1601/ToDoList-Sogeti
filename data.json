@@ -1,28 +1,32 @@
 {
-    "posts": [
-        {
-            "id": 1,
-            "title": "Todo number 1",
-            "state": "NEW",
-            "style": ""
-        },
-        {
-            "id": 2,
-            "title": "Todo number 2",
-            "state": "DONE",
-            "style": "line-through"
-        },
-        {
-            "id": 3,
-            "title": "Todo number 3",
-            "state": "NEW",
-            "style": ""
-        },
-        {
-            "id": 4,
-            "title": "Todo number 4",
-            "state": "DONE",
-            "style": "line-through"
-        }
-    ]
+  "posts": [
+    {
+      "id": 1,
+      "title": "Todo number 1",
+      "state": "DONE",
+      "description": "Description todo number 1",
+      "style": "line-through"
+    },
+    {
+      "id": 2,
+      "title": "Todo number 2",
+      "state": "NEW",
+      "description": "Description todo number 2",
+      "style": "none"
+    },
+    {
+      "id": 3,
+      "title": "Todo number 3",
+      "state": "NEW",
+      "description": "Description todo number 3",
+      "style": ""
+    },
+    {
+      "id": 4,
+      "title": "Todo number 4",
+      "state": "DONE",
+      "description": "Description todo number 4",
+      "style": "line-through"
+    }
+  ]
 }
