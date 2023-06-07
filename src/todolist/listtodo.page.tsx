@@ -50,6 +50,7 @@ export const ListTodoPage = () => {
                 <IonContent>
                     <IonButton
                         expand="block"
+                        data-testid='addToDo'
                         onClick={() =>
                             addToDo({
                                 header: 'Add New ToDO',

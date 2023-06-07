@@ -1,9 +1,6 @@
 import { Dispatch, FunctionComponent, SetStateAction } from "react"
-import { IonButton, IonCheckbox, IonItem, IonLabel, IonRouterOutlet, useIonAlert } from "@ionic/react"
+import { IonButton, IonCheckbox, IonItem, IonLabel, useIonAlert } from "@ionic/react"
 import { TodoModel } from "./ListToDo.model"
-import './ListToDo.component.css'
-import { Route } from "react-router"
-import {ListTodoComponentDetail} from "./ListeToDo.component.detail"
 import { CodeSourceManagementService } from "../codesourcemanagement/codesourcemanagement.service"
 
 export interface ListTodoComponentPropsType {
@@ -50,9 +47,6 @@ export const ListTodoComponent: FunctionComponent<ListTodoComponentPropsType> = 
                 </IonCheckbox>
                 <IonButton routerLink={`home/detail/${todo.id}`} >
                     Detail
-                    <IonRouterOutlet>
-                       <Route path={`home/detail/:${todo.id}`} component={ListTodoComponentDetail } />
-                    </IonRouterOutlet>
                 </IonButton>
                 <IonButton 
                     color="danger"
