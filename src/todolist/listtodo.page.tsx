@@ -37,7 +37,6 @@ export const ListTodoPage = () => {
             description: newToDo[1],
             style: ''
         }, ...todos ])
-        console.log(Newtodo)
     }
 
     return (
@@ -45,11 +44,12 @@ export const ListTodoPage = () => {
             <IonPage>
                 <IonHeader>
                     <IonToolbar>
-                        <IonTitle>ToDoList Sogeti</IonTitle>
+                        <IonTitle className="ion-text-center">ToDoList Sogeti</IonTitle>
                     </IonToolbar>
                 </IonHeader>
                 <IonContent>
                     <IonButton
+                        expand="block"
                         onClick={() =>
                             addToDo({
                                 header: 'Add New ToDO',

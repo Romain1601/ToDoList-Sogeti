@@ -24,6 +24,14 @@ const CodeSourceManagementServiceImplementation = {
             },
             body: JSON.stringify(todo)
         });
+    },
+    deleteTodo: (id: number): Promise<any> => {
+        return fetch(`http://localhost:8000/posts/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json',
+            },
+        });
     }
 }
 

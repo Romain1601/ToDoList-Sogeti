@@ -1,5 +1,5 @@
 import { Dispatch, FunctionComponent, SetStateAction } from "react"
-import { IonButton, IonCheckbox, IonItem, IonLabel, IonRouterOutlet } from "@ionic/react"
+import { IonButton, IonCheckbox, IonItem, IonLabel, IonRouterOutlet, useIonAlert } from "@ionic/react"
 import { TodoModel } from "./ListToDo.model"
 import './ListToDo.component.css'
 import { Route } from "react-router"
@@ -12,6 +12,8 @@ export interface ListTodoComponentPropsType {
 }
 
 export const ListTodoComponent: FunctionComponent<ListTodoComponentPropsType> = ({todo, setTodo}: ListTodoComponentPropsType) => {
+
+    const [deleteToDo] = useIonAlert();
 
     const changeState = (todos: TodoModel) => {
         if(todo.state !== 'DONE') {
@@ -31,11 +33,18 @@ export const ListTodoComponent: FunctionComponent<ListTodoComponentPropsType> = 
        
     }
 
+    const deleteTODO = (todoDelete: TodoModel) => {
+        setTodo(oldTodo => {
+            return oldTodo.filter(todo => todo !== todoDelete)
+        })
+        CodeSourceManagementService.deleteTodo(todoDelete.id)
+    }
+
 
     return (
         <>
             <IonItem>
-                <IonCheckbox justify="space-between" onIonChange={(event) => changeState(todo)} checked={todo.state==='NEW' ? false : true} style={{textDecoration: todo.style}}>
+                <IonCheckbox justify="space-between" onIonChange={() => changeState(todo)} checked={todo.state==='NEW' ? false : true} style={{textDecoration: todo.style}}>
                     <IonLabel>{todo.title}</IonLabel>
                     <IonLabel>{todo.state}</IonLabel>
                 </IonCheckbox>
@@ -44,6 +53,29 @@ export const ListTodoComponent: FunctionComponent<ListTodoComponentPropsType> = 
                     <IonRouterOutlet>
                        <Route path={`home/detail/:${todo.id}`} component={ListTodoComponentDetail } />
                     </IonRouterOutlet>
+                </IonButton>
+                <IonButton 
+                    color="danger"
+                    onClick={() =>
+                        deleteToDo({
+                            header: "Do you want to delete this todo ?",
+                            buttons: [
+                                {
+                                    text: 'No',
+                                    role: 'cancel',
+                                },
+                                {
+                                    text: 'Yes',
+                                    role: 'confirm',
+                                    handler: () => {
+                                        deleteTODO(todo);
+                                    },
+                                },
+                            ],
+                        })
+                    }
+                >
+                    Delete
                 </IonButton>
             </IonItem>     
         </>
