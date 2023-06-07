@@ -15,6 +15,15 @@ const CodeSourceManagementServiceImplementation = {
             },
             body: JSON.stringify(state)
         });
+    },
+    addTodo: (todo: TodoModel): Promise<any> => {
+        return fetch('http://localhost:8000/posts', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(todo)
+        });
     }
 }
 

@@ -1,5 +1,5 @@
 # ToDoList-Sogeti
-https://levelup.gitconnected.com/how-to-create-a-mock-api-server-and-use-it-for-making-api-calls-in-react-fc801a998015
+
 # Context
 Our fantastic product owner has a wonderful, amazing and revolutionary idea... he wants to build a new Todo application. 
 He has a good idea of the application behavior and comes with a backlog containing the following user stories :
